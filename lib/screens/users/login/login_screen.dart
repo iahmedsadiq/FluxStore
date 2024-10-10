@@ -40,8 +40,7 @@ class LoginScreenMobile extends StatefulWidget {
   BaseScreen<LoginScreenMobile> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BaseScreen<LoginScreenMobile>
-    with TickerProviderStateMixin, AnimationButtonLoginMixin, LoginMixin {
+class _LoginPageState extends BaseScreen<LoginScreenMobile> with TickerProviderStateMixin, AnimationButtonLoginMixin, LoginMixin {
   late BuildContext _parentContext;
 
   final _usernameFocusNode = FocusNode();
@@ -91,16 +90,14 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
     final screenSize = MediaQuery.sizeOf(context);
 
     final themeConfig = appModel.themeConfig;
-    final forgetPasswordUrl =
-        appModel.appConfig?.forgetPassword ?? ServerConfig().forgetPassword;
+    final forgetPasswordUrl = appModel.appConfig?.forgetPassword ?? ServerConfig().forgetPassword;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0.0,
-        actions: !Services().widget.isRequiredLogin &&
-                !ModalRoute.of(context)!.canPop
+        actions: !Services().widget.isRequiredLogin && !ModalRoute.of(context)!.canPop
             ? [
                 IconButton(
                   onPressed: loginDone,
@@ -119,8 +116,7 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     alignment: Alignment.center,
-                    width: screenSize.width /
-                        (2 / (screenSize.height / screenSize.width)),
+                    width: screenSize.width / (2 / (screenSize.height / screenSize.width)),
                     constraints: const BoxConstraints(maxWidth: 700),
                     child: AutofillGroup(
                       child: Column(
@@ -156,16 +152,12 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                     nextNode: _usernameFocusNode,
                                     decoration: InputDecoration(
                                       labelText: S.of(_parentContext).username,
-                                      hintText: S
-                                          .of(_parentContext)
-                                          .enterYourEmailOrUsername,
+                                      hintText: S.of(_parentContext).enterYourEmailOrUsername,
                                     ),
                                   ),
                                   CustomTextField(
                                     key: const Key('loginPasswordField'),
-                                    autofillHints: const [
-                                      AutofillHints.password
-                                    ],
+                                    autofillHints: const [AutofillHints.password],
                                     obscureText: true,
                                     showEyeIcon: true,
                                     textInputAction: TextInputAction.done,
@@ -173,19 +165,15 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                     focusNode: _passwordFocusNode,
                                     decoration: InputDecoration(
                                       labelText: S.of(_parentContext).password,
-                                      hintText: S
-                                          .of(_parentContext)
-                                          .enterYourPassword,
+                                      hintText: S.of(_parentContext).enterYourPassword,
                                     ),
                                   ),
                                   if (kLoginSetting.isResetPasswordSupported)
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12.0),
+                                      padding: const EdgeInsets.symmetric(vertical: 12.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          launchForgetPasswordURL(
-                                              forgetPasswordUrl);
+                                          launchForgetPasswordURL(forgetPasswordUrl);
                                         },
                                         behavior: HitTestBehavior.opaque,
                                         child: Padding(
@@ -193,34 +181,27 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                           child: Text(
                                             S.of(context).resetPassword,
                                             style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                              decoration:
-                                                  TextDecoration.underline,
+                                              color: Theme.of(context).primaryColor,
+                                              decoration: TextDecoration.underline,
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  if (!kLoginSetting.isResetPasswordSupported)
-                                    const SizedBox(height: 50.0),
+                                  if (!kLoginSetting.isResetPasswordSupported) const SizedBox(height: 50.0),
                                   StaggerAnimation(
                                     key: const Key('loginSubmitButton'),
                                     titleButton: S.of(context).signInWithEmail,
-                                    buttonController: loginButtonController.view
-                                        as AnimationController,
-                                    onTap: () =>
-                                        isLoading ? null : _onTapLogin(),
+                                    buttonController: loginButtonController.view as AnimationController,
+                                    onTap: () => isLoading ? null : _onTapLogin(),
                                   ),
                                   if (BiometricsTools.instance.isLoginSupported)
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),
                                       child: IconButton(
                                         iconSize: 50,
-                                        onPressed: () =>
-                                            _biometricsLogin(context),
-                                        icon: const Icon(
-                                            Icons.fingerprint_outlined),
+                                        onPressed: () => _biometricsLogin(context),
+                                        icon: const Icon(Icons.fingerprint_outlined),
                                       ),
                                     ),
                                   if (kLoginSetting.showFacebook ||
@@ -230,32 +211,18 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                     Stack(
                                       alignment: AlignmentDirectional.center,
                                       children: <Widget>[
-                                        SizedBox(
-                                            height: 50.0,
-                                            width: 200.0,
-                                            child: Divider(
-                                                color: Colors.grey.shade300)),
-                                        Container(
-                                            height: 30,
-                                            width: 40,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .surface),
+                                        SizedBox(height: 50.0, width: 200.0, child: Divider(color: Colors.grey.shade300)),
+                                        Container(height: 30, width: 40, color: Theme.of(context).colorScheme.surface),
                                         Text(
                                           S.of(context).or,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey.shade400),
+                                          style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
                                         )
                                       ],
                                     ),
                                   SocialLoginButtonRow(
-                                    onApplePressed: () =>
-                                        loginWithApple(context),
-                                    onFacebookPressed: () =>
-                                        loginWithFacebook(context),
-                                    onGooglePressed: () =>
-                                        loginWithGoogle(context),
+                                    onApplePressed: () => loginWithApple(context),
+                                    onFacebookPressed: () => loginWithFacebook(context),
+                                    onGooglePressed: () => loginWithGoogle(context),
                                     onSmsPressed: () => loginWithSMS(context),
                                   ),
                                   const SizedBox(height: 30.0),
@@ -263,21 +230,18 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                     Column(
                                       children: <Widget>[
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(S.of(context).dontHaveAccount),
                                             GestureDetector(
                                               onTap: () {
-                                                NavigateTools.navigateRegister(
-                                                    context);
+                                                NavigateTools.navigateRegister(context);
                                               },
                                               child: Text(
                                                 ' ${S.of(context).signup}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
+                                                  color: Theme.of(context).primaryColor,
                                                 ),
                                               ),
                                             ),

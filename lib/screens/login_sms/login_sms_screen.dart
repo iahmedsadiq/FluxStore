@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flux_firebase/firebase_auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 import '../../app.dart';
@@ -24,23 +26,24 @@ class LoginSMSScreen extends StatefulWidget {
   LoginSMSScreenState createState() => LoginSMSScreenState();
 }
 
-class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
-    with TickerProviderStateMixin {
+class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T> with TickerProviderStateMixin {
   late AnimationController _loginButtonController;
   final TextEditingController _controller = TextEditingController(text: '');
 
   LoginSmsViewModel get viewModel => context.read<LoginSmsViewModel>();
 
-  void loginSMS(context) {
+  void checkLogin(BuildContext context) async {
+    print('LoginSMSScreenState.loginSMS');
     if (viewModel.phoneNumber.isEmpty) {
-      Tools.showSnackBar(ScaffoldMessenger.of(context),
-          S.of(context).pleaseInputFillAllFields);
+      Tools.showSnackBar(ScaffoldMessenger.of(context), S.of(context).pleaseInputFillAllFields);
     } else {
       Future autoRetrieve(String verId) {
+        print('LoginSMSScreenState.autoRetrieve');
         return stopAnimation();
       }
 
       Future smsCodeSent(String verId, [int? forceCodeResend]) {
+        print('LoginSMSScreenState.smsCodeSent');
         stopAnimation();
         return Navigator.push(
           context,
@@ -56,16 +59,32 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
       }
 
       void verifyFailed(exception) {
+        print('LoginSMSScreenState.verifyFailed');
         stopAnimation();
         failMessage(exception.toString(), context);
       }
 
-      viewModel.verify(
-        autoRetrieve: autoRetrieve,
-        smsCodeSent: smsCodeSent,
-        verifyFailed: verifyFailed,
-        startVerify: playAnimation,
+      var firebaseAuth = FirebaseAuth.instance;
+
+      await firebaseAuth.verifyPhoneNumber(
+        verificationCompleted: (PhoneAuthCredential credentials) {
+          print('LoginSMSScreenState.checkLogin::::::verificationCompleted');
+        },
+        verificationFailed: verifyFailed,
+        codeSent: smsCodeSent,
+        phoneNumber: _controller.text,
+        timeout: Duration(seconds: 120),
+        codeAutoRetrievalTimeout: (String error) {
+          print('LoginSMSScreenState.checkLogin:::codeAutoRetrievalTimeout');
+        },
       );
+
+      // viewModel.verify(
+      //   autoRetrieve: autoRetrieve,
+      //   smsCodeSent: smsCodeSent,
+      //   verifyFailed: verifyFailed,
+      //   startVerify: playAnimation,
+      // );
     }
   }
 
@@ -103,6 +122,8 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
 
   @override
   Widget build(BuildContext context) {
+    print('LoginSMSScreenState.build');
+
     final appModel = Provider.of<AppModel>(context, listen: false);
     final themeConfig = appModel.themeConfig;
 
@@ -111,13 +132,8 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0.0,
-        actions: !Services().widget.isRequiredLogin &&
-                !ModalRoute.of(context)!.canPop
-            ? [
-                IconButton(
-                    onPressed: _onClose,
-                    icon: const Icon(Icons.close, size: 25))
-              ]
+        actions: !Services().widget.isRequiredLogin && !ModalRoute.of(context)!.canPop
+            ? [IconButton(onPressed: _onClose, icon: const Icon(Icons.close, size: 25))]
             : null,
       ),
       body: SafeArea(
@@ -142,8 +158,7 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
                       Padding(
                         padding: const EdgeInsets.only(top: 17.0),
                         child: CountryCodePicker(
-                          onChanged: (CountryCode? countryCode) =>
-                              viewModel.updateCountryCode(
+                          onChanged: (CountryCode? countryCode) => viewModel.updateCountryCode(
                             code: countryCode?.code,
                             dialCode: countryCode?.dialCode,
                             name: countryCode?.name,
@@ -156,17 +171,14 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
                             name: countryCode?.name,
                           ),
                           //Get the country information relevant to the initial selection
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surface,
-                          dialogBackgroundColor:
-                              Theme.of(context).dialogBackgroundColor,
+                          backgroundColor: Theme.of(context).colorScheme.surface,
+                          dialogBackgroundColor: Theme.of(context).dialogBackgroundColor,
                         ),
                       ),
                       const SizedBox(width: 8.0),
                       Expanded(
                         child: TextField(
-                          decoration:
-                              InputDecoration(labelText: S.of(context).phone),
+                          decoration: InputDecoration(labelText: S.of(context).phone),
                           keyboardType: TextInputType.phone,
                           controller: _controller,
                         ),
@@ -175,27 +187,21 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
                   ),
                   const SizedBox(height: 60),
                   StaggerAnimation(
-                    titleButton: S.of(context).sendSMSCode,
-                    buttonController:
-                        _loginButtonController.view as AnimationController,
-                    onTap: () => loginSMS(context),
-                  ),
+                      titleButton: S.of(context).sendSMSCode,
+                      buttonController: _loginButtonController.view as AnimationController,
+                      onTap: () {
+                        print('LoginSMSScreenState.build::::login');
+                        checkLogin(context);
+                      }),
                   if (widget.enableRegister)
                     Stack(
                       alignment: AlignmentDirectional.center,
                       children: <Widget>[
-                        SizedBox(
-                            height: 50.0,
-                            width: 200.0,
-                            child: Divider(color: Colors.grey.shade300)),
-                        Container(
-                            height: 30,
-                            width: 40,
-                            color: Theme.of(context).colorScheme.surface),
+                        SizedBox(height: 50.0, width: 200.0, child: Divider(color: Colors.grey.shade300)),
+                        Container(height: 30, width: 40, color: Theme.of(context).colorScheme.surface),
                         Text(
                           S.of(context).or,
-                          style: TextStyle(
-                              fontSize: 12, color: Colors.grey.shade400),
+                          style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
                         )
                       ],
                     ),
@@ -271,7 +277,6 @@ class LoginSMSScreenState<T extends LoginSMSScreen> extends State<T>
   }
 
   Future _onClose() async {
-    await Navigator.of(App.fluxStoreNavigatorKey.currentContext!)
-        .pushReplacementNamed(RouteList.dashboard);
+    await Navigator.of(App.fluxStoreNavigatorKey.currentContext!).pushReplacementNamed(RouteList.dashboard);
   }
 }

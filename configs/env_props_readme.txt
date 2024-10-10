@@ -36,10 +36,10 @@ firebaseDynamicUrl=fluxstoreinspireui.page.link
 
 # Required for Firebase features. Invalid value can cause app crashing. Keep default value if not used.
 # Can be taken from REVERSED_CLIENT_ID in GoogleService-Info.plist.
-googleReversedClientId=com.googleusercontent.apps.412823237422-pf5dr3f75n6r201u24ocioin54u3cseq
+googleReversedClientId=765088986301-qak7hvb6sp1to5lqvphcubecfm0p4ft0.apps.googleusercontent.com
 
 # Used for Google Maps features (optional).
-googleApiKeyAndroid=AIzaSyDSNYVC-8DU9BTcyqkeN9c5pgVhwOBAvGg
+googleApiKeyAndroid=AIzaSyBmE1W8nNSVVYvYouiaAdSLBJo2QDYeX1w
 googleApiKeyIos=AIzaSyDnBpxFOfeG6P06nK97hMg01kEgX48JhLE
 
 # Used for AdMob (optional). Invalid value can cause app crashing. Keep default value if not used.
@@ -55,7 +55,8 @@ facebookLoginProtocolScheme=fb430258564493822
 storePassword=123456
 keyPassword=123456
 keyAlias=key
-storeFile=key.jks
+# storeFile=key.jks
+storeFile=upload-keystore.jks
 
 # Notification icon (Android only). Applies to both Firebase and Onesignal notifications.
 # Icon name will be replaced with `ic_stat_onesignal_default` and placed in

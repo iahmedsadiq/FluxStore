@@ -16,8 +16,8 @@ Map<String, dynamic> environment = {
 
   /// ➡️ lib/common/config/general.dart
   "defaultDarkTheme": false,
-  "enableRemoteConfigFirebase": false,
-  "enableFirebaseAnalytics": false,
+  "enableRemoteConfigFirebase": true,
+  "enableFirebaseAnalytics": true,
   "enableFacebookAppEvents": false,
 
   /// Web Proxy: use only for web FluxStore
@@ -35,7 +35,7 @@ Map<String, dynamic> environment = {
     "nameDefault": "United States",
   },
   "phoneNumberConfig": {
-    "enable": false,
+    "enable": true,
     "countryCodeDefault": "US",
     "dialCodeDefault": "+1",
     "useInternationalFormat": true,
@@ -45,7 +45,7 @@ Map<String, dynamic> environment = {
     "selectorType": "BOTTOM_SHEET", // [DROPDOWN, BOTTOM_SHEET, DIALOG]
   },
   "appRatingConfig": {
-    'showOnOpen': false,
+    'showOnOpen': true,
     'android': 'com.inspireui.fluxstore',
     'ios': '1469772800',
     'minDays': 7,
@@ -223,21 +223,9 @@ Map<String, dynamic> environment = {
     "FAQPageUrl": "https://products.inspireui.com/have-a-question/",
 
     "SocialConnectUrl": [
-      {
-        "name": "Youtube",
-        "icon": "assets/icons/brands/youtube.svg",
-        "url": "https://www.youtube.com/inspireui?sub_confirmation=1"
-      },
-      {
-        "name": "Facebook",
-        "icon": "assets/icons/brands/facebook.svg",
-        "url": "https://www.facebook.com/inspireUI/"
-      },
-      {
-        "name": "Twitter",
-        "icon": "assets/icons/brands/twitter.svg",
-        "url": "https://twitter.com/InspireUI"
-      },
+      {"name": "Youtube", "icon": "assets/icons/brands/youtube.svg", "url": "https://www.youtube.com/inspireui?sub_confirmation=1"},
+      {"name": "Facebook", "icon": "assets/icons/brands/facebook.svg", "url": "https://www.facebook.com/inspireUI/"},
+      {"name": "Twitter", "icon": "assets/icons/brands/twitter.svg", "url": "https://twitter.com/InspireUI"},
     ],
 
     "AutoDetectLanguage": false,
@@ -287,7 +275,7 @@ Map<String, dynamic> environment = {
 
     /// Support Digits : WordPress Mobile Number Signup and Login.
     /// Plugin (https://codecanyon.net/item/digits-wordpress-mobile-number-signup-and-login/19801105)
-    "EnableDigitsMobileLogin": false,
+    "EnableDigitsMobileLogin": true,
     "EnableDigitsMobileFirebase": false,
     "EnableDigitsMobileWhatsApp": false,
 
@@ -310,14 +298,14 @@ Map<String, dynamic> environment = {
     "supportCountriesShipping": null,
 
     // Enable the request Notify permission from onboarding
-    "showRequestNotification": true,
+    "showRequestNotification": false,
 
     "versionCheck": {
       "enable": false,
       "iOSAppStoreCountry": "US",
     },
     "inAppUpdateForAndroid": {
-      "enable": false,
+      "enable": true,
       // "flexible, immediate"
       "typeUpdate": "flexible",
     },
@@ -342,8 +330,7 @@ Map<String, dynamic> environment = {
 
     "b2bKingConfig": {
       "enabled": false,
-      "guestAccessRestriction":
-          "replace_prices_quote", //none, replace_prices_quote
+      "guestAccessRestriction": "replace_prices_quote", //none, replace_prices_quote
     },
 
     /// PW WooCommerce Gift Cards (https://wordpress.org/plugins/pw-woocommerce-gift-cards/)
@@ -414,10 +401,7 @@ Map<String, dynamic> environment = {
     "facebookLoginProtocolScheme": "fb430258564493822",
 
     // This config is used to apple for Wordpress site
-    "appleLoginSetting": {
-      "iOSBundleId": "com.inspireui.mstore.flutter",
-      "appleAccountTeamID": "S9RPAM8224"
-    }
+    "appleLoginSetting": {"iOSBundleId": "com.inspireui.mstore.flutter", "appleAccountTeamID": "S9RPAM8224"}
   },
   "oneSignalKey": {"enable": false, "appID": ""},
 
@@ -429,36 +413,19 @@ Map<String, dynamic> environment = {
     'showLanguage': true,
     'showLanguagePopup': false,
     'data': [
-      {
-        'title': 'Welcome to FluxStore',
-        'image': 'assets/images/fogg-delivery-1.png',
-        'desc': 'Fluxstore is on the way to serve you. '
-      },
+      {'title': 'Welcome to FluxStore', 'image': 'assets/images/fogg-delivery-1.png', 'desc': 'Fluxstore is on the way to serve you. '},
       {
         'title': 'Connect Surrounding World',
         'image': 'assets/images/fogg-uploading-1.png',
-        'desc':
-            'See all things happening around you just by a click in your phone. Fast, convenient and clean.'
+        'desc': 'See all things happening around you just by a click in your phone. Fast, convenient and clean.'
       },
-      {
-        'title': "Let's Get Started",
-        'image': 'assets/images/fogg-order-completed.png',
-        'desc': "Waiting no more, let's see what we get!"
-      }
+      {'title': "Let's Get Started", 'image': 'assets/images/fogg-order-completed.png', 'desc': "Waiting no more, let's see what we get!"}
     ],
   },
 
   "vendorOnBoardingData": [
-    {
-      'title': 'Welcome aboard',
-      'image': 'assets/images/searching.png',
-      'desc': 'Just a few more steps to become our vendor'
-    },
-    {
-      'title': 'Let\'s Get Started',
-      'image': 'assets/images/manage.png',
-      'desc': 'Good Luck for great beginnings.'
-    }
+    {'title': 'Welcome aboard', 'image': 'assets/images/searching.png', 'desc': 'Just a few more steps to become our vendor'},
+    {'title': 'Let\'s Get Started', 'image': 'assets/images/manage.png', 'desc': 'Good Luck for great beginnings.'}
   ],
 
   /// ➡️ lib/common/advertise.dart
@@ -529,7 +496,7 @@ Map<String, dynamic> environment = {
 
   /// ➡️ lib/common/dynamic_link.dart
   "firebaseDynamicLinkConfig": {
-    "isEnabled": true,
+    "isEnabled": false,
     "shortDynamicLinkEnable": true,
 
     /// Domain is the domain name for your product.
@@ -548,7 +515,7 @@ Map<String, dynamic> environment = {
   },
 
   "dynamicLinkConfig": {
-    "enable": true,
+    "enable": false,
     "type": "branchIO",
     "branchIO": {
       "liveMode": false,
@@ -558,125 +525,35 @@ Map<String, dynamic> environment = {
   /// ➡️ lib/common/languages.dart
   "languagesInfo": [
     // 1 English - intl_en.arb
-    {
-      "name": "English",
-      "icon": "assets/images/country/gb.png",
-      "code": "en",
-      "text": "English",
-      "storeViewCode": ""
-    },
+    {"name": "English", "icon": "assets/images/country/gb.png", "code": "en", "text": "English", "storeViewCode": ""},
     // 2 Hindi - intl_hi.arb
-    {
-      "name": "Hindi",
-      "icon": "assets/images/country/in.png",
-      "code": "hi",
-      "text": "हिन्दी",
-      "storeViewCode": "hi"
-    },
+    {"name": "Hindi", "icon": "assets/images/country/in.png", "code": "hi", "text": "हिन्दी", "storeViewCode": "hi"},
     // 3 Spanish - intl_es.arb
-    {
-      "name": "Spanish",
-      "icon": "assets/images/country/es.png",
-      "code": "es",
-      "text": "Español",
-      "storeViewCode": ""
-    },
+    {"name": "Spanish", "icon": "assets/images/country/es.png", "code": "es", "text": "Español", "storeViewCode": ""},
     // 4 French - intl_fr.arb
-    {
-      "name": "French",
-      "icon": "assets/images/country/fr.png",
-      "code": "fr",
-      "text": "Français",
-      "storeViewCode": "fr"
-    },
+    {"name": "French", "icon": "assets/images/country/fr.png", "code": "fr", "text": "Français", "storeViewCode": "fr"},
     // 5 Arabic - intl_ar.arb
-    {
-      "name": "Arabic",
-      "icon": "assets/images/country/ar.png",
-      "code": "ar",
-      "text": "العربية",
-      "storeViewCode": "ar"
-    },
+    {"name": "Arabic", "icon": "assets/images/country/ar.png", "code": "ar", "text": "العربية", "storeViewCode": "ar"},
     // 6 Russian - intl_ru.arb
-    {
-      "name": "Russian",
-      "icon": "assets/images/country/ru.png",
-      "code": "ru",
-      "text": "Русский",
-      "storeViewCode": "ru"
-    },
+    {"name": "Russian", "icon": "assets/images/country/ru.png", "code": "ru", "text": "Русский", "storeViewCode": "ru"},
     // 7 Indonesian - intl_id.arb
-    {
-      "name": "Indonesian",
-      "icon": "assets/images/country/id.png",
-      "code": "id",
-      "text": "Bahasa Indonesia",
-      "storeViewCode": "id"
-    },
+    {"name": "Indonesian", "icon": "assets/images/country/id.png", "code": "id", "text": "Bahasa Indonesia", "storeViewCode": "id"},
     // 8 Japanese - intl_ja.arb
-    {
-      "name": "Japanese",
-      "icon": "assets/images/country/ja.png",
-      "code": "ja",
-      "text": "日本語",
-      "storeViewCode": ""
-    },
+    {"name": "Japanese", "icon": "assets/images/country/ja.png", "code": "ja", "text": "日本語", "storeViewCode": ""},
     // 9 Korean - intl_ko.arb
-    {
-      "name": "Korean",
-      "icon": "assets/images/country/ko.png",
-      "code": "ko",
-      "text": "한국어/조선말",
-      "storeViewCode": "ko"
-    },
+    {"name": "Korean", "icon": "assets/images/country/ko.png", "code": "ko", "text": "한국어/조선말", "storeViewCode": "ko"},
     // 10 Vietnamese - intl_vi.arb
-    {
-      "name": "Vietnamese",
-      "icon": "assets/images/country/vn.png",
-      "code": "vi",
-      "text": "Tiếng Việt",
-      "storeViewCode": ""
-    },
+    {"name": "Vietnamese", "icon": "assets/images/country/vn.png", "code": "vi", "text": "Tiếng Việt", "storeViewCode": ""},
     // 11 Romanian - intl_ro.arb
-    {
-      "name": "Romanian",
-      "icon": "assets/images/country/ro.png",
-      "code": "ro",
-      "text": "Românește",
-      "storeViewCode": "ro"
-    },
+    {"name": "Romanian", "icon": "assets/images/country/ro.png", "code": "ro", "text": "Românește", "storeViewCode": "ro"},
     // 12 Turkish - intl_tr.arb
-    {
-      "name": "Turkish",
-      "icon": "assets/images/country/tr.png",
-      "code": "tr",
-      "text": "Türkçe",
-      "storeViewCode": "tr"
-    },
+    {"name": "Turkish", "icon": "assets/images/country/tr.png", "code": "tr", "text": "Türkçe", "storeViewCode": "tr"},
     // 13 Italian - intl_it.arb
-    {
-      "name": "Italian",
-      "icon": "assets/images/country/it.png",
-      "code": "it",
-      "text": "Italiano",
-      "storeViewCode": "it"
-    },
+    {"name": "Italian", "icon": "assets/images/country/it.png", "code": "it", "text": "Italiano", "storeViewCode": "it"},
     // 14 German - intl_de.arb
-    {
-      "name": "German",
-      "icon": "assets/images/country/de.png",
-      "code": "de",
-      "text": "Deutsch",
-      "storeViewCode": "de"
-    },
+    {"name": "German", "icon": "assets/images/country/de.png", "code": "de", "text": "Deutsch", "storeViewCode": "de"},
     // 15 Brazilian Portuguese - intl_pt_BR.arb
-    {
-      "name": "Brazilian Portuguese",
-      "icon": "assets/images/country/br.png",
-      "code": "pt_BR",
-      "text": "Português do Brasil",
-      "storeViewCode": ""
-    },
+    {"name": "Brazilian Portuguese", "icon": "assets/images/country/br.png", "code": "pt_BR", "text": "Português do Brasil", "storeViewCode": ""},
     // 16 Portuguese from Portugal - intl_pt_PT.arb
     {
       "name": "Portuguese from Portugal",
@@ -686,37 +563,13 @@ Map<String, dynamic> environment = {
       "storeViewCode": ""
     },
     // 17 Hungarian - intl_hu.arb
-    {
-      "name": "Hungarian",
-      "icon": "assets/images/country/hu.png",
-      "code": "hu",
-      "text": "Magyar nyelv",
-      "storeViewCode": "hu"
-    },
+    {"name": "Hungarian", "icon": "assets/images/country/hu.png", "code": "hu", "text": "Magyar nyelv", "storeViewCode": "hu"},
     // 18 Hebrew - intl_he.arb
-    {
-      "name": "Hebrew",
-      "icon": "assets/images/country/he.png",
-      "code": "he",
-      "text": "עִבְרִית",
-      "storeViewCode": "he"
-    },
+    {"name": "Hebrew", "icon": "assets/images/country/he.png", "code": "he", "text": "עִבְרִית", "storeViewCode": "he"},
     // 19 Thai - intl_th.arb
-    {
-      "name": "Thai",
-      "icon": "assets/images/country/th.png",
-      "code": "th",
-      "text": "ภาษาไทย",
-      "storeViewCode": "th"
-    },
+    {"name": "Thai", "icon": "assets/images/country/th.png", "code": "th", "text": "ภาษาไทย", "storeViewCode": "th"},
     // 20 Dutch - intl_nl.arb
-    {
-      "name": "Dutch",
-      "icon": "assets/images/country/nl.png",
-      "code": "nl",
-      "text": "Nederlands",
-      "storeViewCode": "nl"
-    },
+    {"name": "Dutch", "icon": "assets/images/country/nl.png", "code": "nl", "text": "Nederlands", "storeViewCode": "nl"},
     // 21 Serbian - intl_sr.arb
     {
       "name": "Serbian",
@@ -726,101 +579,29 @@ Map<String, dynamic> environment = {
       "storeViewCode": "sr"
     },
     // 22 Polish - intl_pl.arb
-    {
-      "name": "Polish",
-      "icon": "assets/images/country/pl.png",
-      "code": "pl",
-      "text": "Język polski",
-      "storeViewCode": "pl"
-    },
+    {"name": "Polish", "icon": "assets/images/country/pl.png", "code": "pl", "text": "Język polski", "storeViewCode": "pl"},
     // 23 Persian - intl_fa.arb
-    {
-      "name": "Persian",
-      "icon": "assets/images/country/fa.png",
-      "code": "fa",
-      "text": "زبان فارسی",
-      "storeViewCode": ""
-    },
+    {"name": "Persian", "icon": "assets/images/country/fa.png", "code": "fa", "text": "زبان فارسی", "storeViewCode": ""},
     // 24 Ukrainian - intl_uk.arb
-    {
-      "name": "Ukrainian",
-      "icon": "assets/images/country/uk.png",
-      "code": "uk",
-      "text": "Українська мова",
-      "storeViewCode": ""
-    },
+    {"name": "Ukrainian", "icon": "assets/images/country/uk.png", "code": "uk", "text": "Українська мова", "storeViewCode": ""},
     // 25 Bengali - intl_bn.arb
-    {
-      "name": "Bengali",
-      "icon": "assets/images/country/bn.png",
-      "code": "bn",
-      "text": "বাংলা",
-      "storeViewCode": ""
-    },
+    {"name": "Bengali", "icon": "assets/images/country/bn.png", "code": "bn", "text": "বাংলা", "storeViewCode": ""},
     // 26 Tamil - intl_ta.arb
-    {
-      "name": "Tamil",
-      "icon": "assets/images/country/ta.png",
-      "code": "ta",
-      "text": "தமிழ்",
-      "storeViewCode": ""
-    },
+    {"name": "Tamil", "icon": "assets/images/country/ta.png", "code": "ta", "text": "தமிழ்", "storeViewCode": ""},
     // 27 Kurdish - intl_ku.arb
-    {
-      "name": "Kurdish",
-      "icon": "assets/images/country/ku.png",
-      "code": "ku",
-      "text": "Kurdî / کوردی",
-      "storeViewCode": ""
-    },
+    {"name": "Kurdish", "icon": "assets/images/country/ku.png", "code": "ku", "text": "Kurdî / کوردی", "storeViewCode": ""},
     // 28 Czech - intl_cs.arb
-    {
-      "name": "Czech",
-      "icon": "assets/images/country/cs.png",
-      "code": "cs",
-      "text": "Čeština",
-      "storeViewCode": "cs"
-    },
+    {"name": "Czech", "icon": "assets/images/country/cs.png", "code": "cs", "text": "Čeština", "storeViewCode": "cs"},
     // 29 Swedish - intl_sv.arb
-    {
-      "name": "Swedish",
-      "icon": "assets/images/country/sv.png",
-      "code": "sv",
-      "text": "Svenska",
-      "storeViewCode": ""
-    },
+    {"name": "Swedish", "icon": "assets/images/country/sv.png", "code": "sv", "text": "Svenska", "storeViewCode": ""},
     // 30 Finland - intl_fi.arb
-    {
-      "name": "Finland",
-      "icon": "assets/images/country/fi.png",
-      "code": "fi",
-      "text": "Suomi",
-      "storeViewCode": ""
-    },
+    {"name": "Finland", "icon": "assets/images/country/fi.png", "code": "fi", "text": "Suomi", "storeViewCode": ""},
     // 31 Greek - intl_el.arb
-    {
-      "name": "Greek",
-      "icon": "assets/images/country/el.png",
-      "code": "el",
-      "text": "Ελληνικά",
-      "storeViewCode": ""
-    },
+    {"name": "Greek", "icon": "assets/images/country/el.png", "code": "el", "text": "Ελληνικά", "storeViewCode": ""},
     // 32 Khmer - intl_km.arb
-    {
-      "name": "Khmer",
-      "icon": "assets/images/country/km.png",
-      "code": "km",
-      "text": "ភាសាខ្មែរ",
-      "storeViewCode": ""
-    },
+    {"name": "Khmer", "icon": "assets/images/country/km.png", "code": "km", "text": "ភាសាខ្មែរ", "storeViewCode": ""},
     // 33 Kannada - intl_kn.arb
-    {
-      "name": "Kannada",
-      "icon": "assets/images/country/kn.png",
-      "code": "kn",
-      "text": "ಕನ್ನಡ",
-      "storeViewCode": ""
-    },
+    {"name": "Kannada", "icon": "assets/images/country/kn.png", "code": "kn", "text": "ಕನ್ನಡ", "storeViewCode": ""},
     // 34 Marathi - intl_mr.arb
     {
       "name": "Marathi",
@@ -838,77 +619,23 @@ Map<String, dynamic> environment = {
       "storeViewCode": ""
     },
     // 36 Bosnian - intl_bs.arb
-    {
-      "name": "Bosnian",
-      "icon": "assets/images/country/bs.png",
-      "code": "bs",
-      "text": "босански",
-      "storeViewCode": ""
-    },
+    {"name": "Bosnian", "icon": "assets/images/country/bs.png", "code": "bs", "text": "босански", "storeViewCode": ""},
     // 37 Lao - intl_lo.arb
-    {
-      "name": "Lao",
-      "icon": "assets/images/country/lo.png",
-      "code": "lo",
-      "text": "ພາສາລາວ",
-      "storeViewCode": ""
-    },
+    {"name": "Lao", "icon": "assets/images/country/lo.png", "code": "lo", "text": "ພາສາລາວ", "storeViewCode": ""},
     // 38 Slovak - intl_sk.arb
-    {
-      "name": "Slovak",
-      "icon": "assets/images/country/sk.png",
-      "code": "sk",
-      "text": "Slovaščina",
-      "storeViewCode": ""
-    },
+    {"name": "Slovak", "icon": "assets/images/country/sk.png", "code": "sk", "text": "Slovaščina", "storeViewCode": ""},
     // 39 Swahili - intl_sw.arb
-    {
-      "name": "Swahili",
-      "icon": "assets/images/country/sw.png",
-      "code": "sw",
-      "text": "كِيْسَوَاحِيْلِيْ",
-      "storeViewCode": ""
-    },
+    {"name": "Swahili", "icon": "assets/images/country/sw.png", "code": "sw", "text": "كِيْسَوَاحِيْلِيْ", "storeViewCode": ""},
     // 40 Chinese - intl_zh.arb
-    {
-      "name": "Chinese",
-      "icon": "assets/images/country/zh.png",
-      "code": "zh",
-      "text": "中文",
-      "storeViewCode": ""
-    },
+    {"name": "Chinese", "icon": "assets/images/country/zh.png", "code": "zh", "text": "中文", "storeViewCode": ""},
     // 41 Chinese Traditional - intl_zh_TW.arb
-    {
-      "name": "Chinese (traditional)",
-      "icon": "assets/images/country/zh.png",
-      "code": "zh_TW",
-      "text": "漢語",
-      "storeViewCode": ""
-    },
+    {"name": "Chinese (traditional)", "icon": "assets/images/country/zh.png", "code": "zh_TW", "text": "漢語", "storeViewCode": ""},
     // 42 Chinese Simplified - intl_zh_CN.arb
-    {
-      "name": "Chinese (simplified)",
-      "icon": "assets/images/country/zh.png",
-      "code": "zh_CN",
-      "text": "汉语",
-      "storeViewCode": ""
-    },
+    {"name": "Chinese (simplified)", "icon": "assets/images/country/zh.png", "code": "zh_CN", "text": "汉语", "storeViewCode": ""},
     // 43 Burmese - intl_my.arb
-    {
-      "name": "Burmese",
-      "icon": "assets/images/country/my.png",
-      "code": "my",
-      "text": "မြန်မာဘာသာစကား",
-      "storeViewCode": ""
-    },
+    {"name": "Burmese", "icon": "assets/images/country/my.png", "code": "my", "text": "မြန်မာဘာသာစကား", "storeViewCode": ""},
     // 44 Albanian - intl_sq.arb
-    {
-      "name": "Albanian",
-      "icon": "assets/images/country/sq.png",
-      "code": "sq",
-      "text": "Shqip",
-      "storeViewCode": ""
-    },
+    {"name": "Albanian", "icon": "assets/images/country/sq.png", "code": "sq", "text": "Shqip", "storeViewCode": ""},
     // 45 Danish - intl_da.arb
     {
       "name": "Danish",
@@ -918,21 +645,9 @@ Map<String, dynamic> environment = {
       "storeViewCode": ""
     },
     // 46 Tigrinya - intl_ti.arb
-    {
-      "name": "Tigrinya",
-      "icon": "assets/images/country/er.png",
-      "code": "ti",
-      "text": "ትግርኛ",
-      "storeViewCode": "ti"
-    },
+    {"name": "Tigrinya", "icon": "assets/images/country/er.png", "code": "ti", "text": "ትግርኛ", "storeViewCode": "ti"},
     // 47 Urdu - intl_ur.arb
-    {
-      "name": "Urdu",
-      "icon": "assets/images/country/pk.png",
-      "code": "ur",
-      "text": "اُردُو",
-      "storeViewCode": ""
-    },
+    {"name": "Urdu", "icon": "assets/images/country/pk.png", "code": "ur", "text": "اُردُو", "storeViewCode": ""},
     // 48 Azerbaijani- intl_az.arb
     {
       "name": "Azerbaijani",
@@ -942,77 +657,23 @@ Map<String, dynamic> environment = {
       "storeViewCode": ""
     },
     // 49 Kazakhstan - intl_kk.arb
-    {
-      "name": "Kazakhstan",
-      "icon": "assets/images/country/kz.png",
-      "code": "kk",
-      "text": "Қазақ тілі",
-      "storeViewCode": ""
-    },
+    {"name": "Kazakhstan", "icon": "assets/images/country/kz.png", "code": "kk", "text": "Қазақ тілі", "storeViewCode": ""},
     // 50 Uzbek - intl_uz.arb
-    {
-      "name": "Uzbek",
-      "icon": "assets/images/country/uz.png",
-      "code": "uz",
-      "text": "O'zbek",
-      "storeViewCode": ""
-    },
+    {"name": "Uzbek", "icon": "assets/images/country/uz.png", "code": "uz", "text": "O'zbek", "storeViewCode": ""},
     // 51 Estonian - intl_et.arb
-    {
-      "name": "Estonian",
-      "icon": "assets/images/country/et.png",
-      "code": "et",
-      "text": "Eesti",
-      "storeViewCode": ""
-    },
+    {"name": "Estonian", "icon": "assets/images/country/et.png", "code": "et", "text": "Eesti", "storeViewCode": ""},
     // 52 Catalan - intl_ca.arb
-    {
-      "name": "Catalan",
-      "icon": "assets/images/country/ca.png",
-      "code": "ca",
-      "text": "Català",
-      "storeViewCode": ""
-    },
+    {"name": "Catalan", "icon": "assets/images/country/ca.png", "code": "ca", "text": "Català", "storeViewCode": ""},
     // 53 Georgia - intl_ka.arb
-    {
-      "name": "Georgia",
-      "icon": "assets/images/country/ka.png",
-      "code": "ka",
-      "text": "ქართული ენა",
-      "storeViewCode": ""
-    },
+    {"name": "Georgia", "icon": "assets/images/country/ka.png", "code": "ka", "text": "ქართული ენა", "storeViewCode": ""},
     // 54 Bulgaria - intl_bg.arb
-    {
-      "name": "Bulgaria",
-      "icon": "assets/images/country/bg.png",
-      "code": "bg",
-      "text": "Български език",
-      "storeViewCode": ""
-    },
+    {"name": "Bulgaria", "icon": "assets/images/country/bg.png", "code": "bg", "text": "Български език", "storeViewCode": ""},
     // 55 Sinhala - intl_si.arb
-    {
-      "name": "Sinhala",
-      "icon": "assets/images/country/si.png",
-      "code": "si",
-      "text": "සිංහල",
-      "storeViewCode": ""
-    },
+    {"name": "Sinhala", "icon": "assets/images/country/si.png", "code": "si", "text": "සිංහල", "storeViewCode": ""},
     // 56 Lithuanian - intl_lt.arb
-    {
-      "name": "Lithuanian",
-      "icon": "assets/images/country/lt.png",
-      "code": "lt",
-      "text": "Lietuva",
-      "storeViewCode": ""
-    },
+    {"name": "Lithuanian", "icon": "assets/images/country/lt.png", "code": "lt", "text": "Lietuva", "storeViewCode": ""},
     // 57 Norwegian - intl_no.arb
-    {
-      "name": "Norwegian",
-      "icon": "assets/images/country/no.png",
-      "code": "no",
-      "text": "Nordmenn",
-      "storeViewCode": ""
-    },
+    {"name": "Norwegian", "icon": "assets/images/country/no.png", "code": "no", "text": "Nordmenn", "storeViewCode": ""},
   ],
 
   /// ➡️  lib/common/config/payments.dart
@@ -1143,12 +804,9 @@ Map<String, dynamic> environment = {
     "stripeApiVersion": 3,
   },
   "paypalConfig": {
-    "clientId":
-        "ASlpjFreiGp3gggRKo6YzXMyGM6-NwndBAQ707k6z3-WkSSMTPDfEFmNmky6dBX00lik8wKdToWiJj5w",
-    "secret":
-        "ECbFREri7NFj64FI_9WzS6A0Az2DqNLrVokBo0ZBu4enHZKMKOvX45v9Y1NBPKFr6QJv2KaSp5vk5A1G",
-    "returnUrl":
-        "com.inspireui.fluxstore://paypalpay", // Example: "your.android.package.name:://paypalpay"
+    "clientId": "ASlpjFreiGp3gggRKo6YzXMyGM6-NwndBAQ707k6z3-WkSSMTPDfEFmNmky6dBX00lik8wKdToWiJj5w",
+    "secret": "ECbFREri7NFj64FI_9WzS6A0Az2DqNLrVokBo0ZBu4enHZKMKOvX45v9Y1NBPKFr6QJv2KaSp5vk5A1G",
+    "returnUrl": "com.inspireui.fluxstore://paypalpay", // Example: "your.android.package.name:://paypalpay"
     "production": false,
     "paymentMethodId": "paypal", //ppcp-gateway
     "enabled": true,
@@ -1163,30 +821,15 @@ Map<String, dynamic> environment = {
     "paymentMethodId": "paypal_express",
     "enabled": false,
   },
-  "razorpayConfig": {
-    "keyId": "rzp_test_SDo2WKBNQXDk5Y",
-    "keySecret": "RrgfT3oxbJdaeHSzvuzaJRZf",
-    "paymentMethodId": "razorpay",
-    "enabled": true
-  },
-  "tapConfig": {
-    "SecretKey": "sk_test_XKokBfNWv6FIYuTMg5sLPjhJ",
-    "paymentMethodId": "tap",
-    "enabled": true
-  },
+  "razorpayConfig": {"keyId": "rzp_test_SDo2WKBNQXDk5Y", "keySecret": "RrgfT3oxbJdaeHSzvuzaJRZf", "paymentMethodId": "razorpay", "enabled": true},
+  "tapConfig": {"SecretKey": "sk_test_XKokBfNWv6FIYuTMg5sLPjhJ", "paymentMethodId": "tap", "enabled": true},
   "mercadoPagoConfig": {
-    "accessToken":
-        "TEST-5726912977510261-102413-65873095dc5b0a877969b7f6ffcceee4-613803978",
+    "accessToken": "TEST-5726912977510261-102413-65873095dc5b0a877969b7f6ffcceee4-613803978",
     "production": false,
     "paymentMethodId": "woo-mercado-pago-basic",
     "enabled": true
   },
-  "payTmConfig": {
-    "paymentMethodId": "paytm",
-    "merchantId": "your-merchant-id",
-    "production": false,
-    "enabled": true
-  },
+  "payTmConfig": {"paymentMethodId": "paytm", "merchantId": "your-merchant-id", "production": false, "enabled": true},
   "payStackConfig": {
     'paymentMethodId': 'paystack',
     'publicKey': 'pk_test_a1a37615c9ca90dead5dd84dedbb5e476b640a6f',
@@ -1211,11 +854,7 @@ Map<String, dynamic> environment = {
     "production": false,
     "enabled": true
   },
-  "midtransConfig": {
-    'paymentMethodId': 'midtrans',
-    'clientKey': 'SB-Mid-client-he8W_FIlvugfA2RD',
-    'enabled': true
-  },
+  "midtransConfig": {'paymentMethodId': 'midtrans', 'clientKey': 'SB-Mid-client-he8W_FIlvugfA2RD', 'enabled': true},
   "inAppPurchaseConfig": {
     'consumableProductIDs': [
       'com.inspireui.fluxstore.test',
@@ -1228,8 +867,7 @@ Map<String, dynamic> environment = {
   },
   "xenditConfig": {
     'paymentMethodId': 'xendit',
-    'secretApiKey':
-        'xnd_development_4E9ql5zFiC1BBmhK2r7wr9mNYyyvjLs0fIal00tGuHEj1iEYCu7B7tCUudv3Xe',
+    'secretApiKey': 'xnd_development_4E9ql5zFiC1BBmhK2r7wr9mNYyyvjLs0fIal00tGuHEj1iEYCu7B7tCUudv3Xe',
     'enabled': true
   },
   "expressPayConfig": {
@@ -1240,16 +878,8 @@ Map<String, dynamic> environment = {
     "production": false,
     'enabled': true
   },
-  "thaiPromptPayConfig": {
-    'paymentMethodId': 'thai-promptpay-easy',
-    'enabled': true
-  },
-  "fibConfig": {
-    'paymentMethodId': 'fib',
-    'clientId': 'narin-beauty',
-    'clientSecret': '7ffcd642-87b7-4cc0-b75d-c25d5276cffe',
-    'enabled': false
-  },
+  "thaiPromptPayConfig": {'paymentMethodId': 'thai-promptpay-easy', 'enabled': true},
+  "fibConfig": {'paymentMethodId': 'fib', 'clientId': 'narin-beauty', 'clientSecret': '7ffcd642-87b7-4cc0-b75d-c25d5276cffe', 'enabled': false},
   "thawaniConfig": {
     'paymentMethodId': 'thawani_gw',
     'secretKey': 'rRQ26GcsZzoEhbrP2HZvLYDbn9C9et',
@@ -1262,14 +892,12 @@ Map<String, dynamic> environment = {
   "defaultCountryShipping": [],
 
   /// Ref: https://support.inspireui.com/help-center/articles/35/37/169/aftership
-  "afterShip": {
-    "api": "e2e9bae8-ee39-46a9-a084-781d0139274f",
-    "tracking_url": "https://fluxstore.aftership.com"
-  },
+  "afterShip": {"api": "e2e9bae8-ee39-46a9-a084-781d0139274f", "tracking_url": "https://fluxstore.aftership.com"},
 
   /// Ref: https://support.inspireui.com/help-center/articles/3/25/16/google-map-address
   "googleApiKey": {
-    'android': 'AIzaSyDSNYVC-8DU9BTcyqkeN9c5pgVhwOBAvGg',
+    // 'android': 'AIzaSyDSNYVC-8DU9BTcyqkeN9c5pgVhwOBAvGg',
+    'android': 'AIzaSyBmE1W8nNSVVYvYouiaAdSLBJo2QDYeX1w',
     'ios': 'AIzaSyDSNYVC-8DU9BTcyqkeN9c5pgVhwOBAvGg',
     'web': 'AIzaSyDSNYVC-8DU9BTcyqkeN9c5pgVhwOBAvGg'
   },
@@ -1395,12 +1023,7 @@ Map<String, dynamic> environment = {
     'showRelatedBlog': true,
     'showAuthorInfo': true
   },
-  "productVariantLayout": {
-    "color": "color",
-    "size": "box",
-    "height": "option",
-    "color-image": "image"
-  },
+  "productVariantLayout": {"color": "color", "size": "box", "height": "option", "color-image": "image"},
   "productAddons": {
     /// Set the allowed file type for file upload.
     /// On iOS will open Photos app.
@@ -1438,24 +1061,9 @@ Map<String, dynamic> environment = {
   /// Translate the product variant by languages
   /// As it could be limited with the REST API when request variant
   "productVariantLanguage": {
-    "en": {
-      "color": "Color",
-      "size": "Size",
-      "height": "Height",
-      "color-image": "Color"
-    },
-    "ar": {
-      "color": "اللون",
-      "size": "بحجم",
-      "height": "ارتفاع",
-      "color-image": "اللون"
-    },
-    "vi": {
-      "color": "Màu",
-      "size": "Kích thước",
-      "height": "Chiều Cao",
-      "color-image": "Màu"
-    }
+    "en": {"color": "Color", "size": "Size", "height": "Height", "color-image": "Color"},
+    "ar": {"color": "اللون", "size": "بحجم", "height": "ارتفاع", "color-image": "اللون"},
+    "vi": {"color": "Màu", "size": "Kích thước", "height": "Chiều Cao", "color-image": "Màu"}
   },
 
   /// Exclude these category IDs from the list (e.g., "311,23,208").
@@ -1493,7 +1101,7 @@ Map<String, dynamic> environment = {
     },
   },
   "openAIConfig": {
-    'enableChat': true,
+    'enableChat': false,
     'supabaseUrl': 'https://rtkrqvtslujdzjxhjocu.supabase.co',
     'supabaseAnonKey':
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ0a3JxdnRzbHVqZHpqeGhqb2N1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzU5OTI5MzMsImV4cCI6MTk5MTU2ODkzM30.qKtfNHhL6AKqGsmDfjMq90bIWIWlnN3UVgnwcLF_vGY',
@@ -1519,31 +1127,14 @@ Map<String, dynamic> environment = {
           "https://trello.com/1/cards/611a38c89ebde41ec7cf10e2/attachments/611a392cceb1b534aa92a83e/previews/611a392dceb1b534aa92a84d/download",
       "description": "Realtime Chat",
     },
-    {
-      "app": "chatGPT",
-      "imageData": "https://i.imgur.com/pp1qlPd.png",
-      "description": "Chat GPT"
-    },
-    {
-      "app": "https://wa.me/849908854",
-      "iconData": "whatsapp",
-      "description": "WhatsApp"
-    },
+    {"app": "chatGPT", "imageData": "https://i.imgur.com/pp1qlPd.png", "description": "Chat GPT"},
+    {"app": "https://wa.me/849908854", "iconData": "whatsapp", "description": "WhatsApp"},
     {"app": "tel:8499999999", "iconData": "phone", "description": "Call Us"},
     {"app": "sms://8499999999", "iconData": "sms", "description": "Send SMS"},
+    {"app": "https://tawk.to/chat/5d830419c22bdd393bb69888/default", "iconData": "whatsapp", "description": "Tawk Chat"},
+    {"app": "http://m.me/inspireui", "iconData": "facebookMessenger", "description": "Facebook Chat"},
     {
-      "app": "https://tawk.to/chat/5d830419c22bdd393bb69888/default",
-      "iconData": "whatsapp",
-      "description": "Tawk Chat"
-    },
-    {
-      "app": "http://m.me/inspireui",
-      "iconData": "facebookMessenger",
-      "description": "Facebook Chat"
-    },
-    {
-      "app":
-          "https://twitter.com/messages/compose?recipient_id=821597032011931648",
+      "app": "https://twitter.com/messages/compose?recipient_id=821597032011931648",
       "imageData":
           "https://trello.com/1/cards/611a38c89ebde41ec7cf10e2/attachments/611a38d026894f10dc1091c8/previews/611a38d126894f10dc1091d6/download",
       "description": "Twitter Chat"
@@ -1644,8 +1235,7 @@ Map<String, dynamic> environment = {
     "maxImage": 5,
     "judgeConfig": {
       "domain": "https://inspireui-mstore.myshopify.com",
-      "apiKey":
-          "8b0d5f99732ec01d6f6b64891166e4fe4ba9634a83fe57e14edda11489da0f7e",
+      "apiKey": "8b0d5f99732ec01d6f6b64891166e4fe4ba9634a83fe57e14edda11489da0f7e",
     }
   },
   "orderConfig": {

@@ -38,7 +38,7 @@ Future<http.Response> httpCache(
       }
       return http.Response('', 404);
     } catch (e) {
-      // printLog(trace);
+      printLog('CACHE ISSUE: $uri\n$headers');
       printLog('CACHE ISSUE: ${e.toString()}', startTime, Level.debug);
     }
   }

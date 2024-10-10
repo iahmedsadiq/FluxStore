@@ -38,9 +38,7 @@ class _SocialLoginButtonRowState extends State<SocialLoginButtonRow> {
   /// Show the Apple login button if enabled
   /// in [kLoginSetting.showAppleLogin] config
   /// and the Apple login is available.
-  bool get showAppleButton =>
-      kLoginSetting.showAppleLogin &&
-      (_isCheckingAppleLoginAvailability || _isAppleLoginAvailable);
+  bool get showAppleButton => kLoginSetting.showAppleLogin && (_isCheckingAppleLoginAvailability || _isAppleLoginAvailable);
 
   @override
   void initState() {
@@ -48,8 +46,7 @@ class _SocialLoginButtonRowState extends State<SocialLoginButtonRow> {
     WidgetsBinding.instance.endOfFrame.then((_) async {
       if (_isCheckingAppleLoginAvailability) {
         try {
-          _isAppleLoginAvailable =
-              ServerConfig().isBuilder || (await TheAppleSignIn.isAvailable());
+          _isAppleLoginAvailable = ServerConfig().isBuilder || (await TheAppleSignIn.isAvailable());
 
           _isCheckingAppleLoginAvailability = false;
           if (mounted) {
@@ -84,15 +81,15 @@ class _SocialLoginButtonRowState extends State<SocialLoginButtonRow> {
               ),
             ),
           ),
-        if (kLoginSetting.showFacebook && widget.onFacebookPressed != null)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: horizontalPadding,
-            ),
-            child: SignInButtonFacebook(
-              onPressed: () => widget.onFacebookPressed?.call(),
-            ),
-          ),
+        // if (kLoginSetting.showFacebook && widget.onFacebookPressed != null)
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(
+        //       horizontal: horizontalPadding,
+        //     ),
+        //     child: SignInButtonFacebook(
+        //       onPressed: () => widget.onFacebookPressed?.call(),
+        //     ),
+        //   ),
         if (kLoginSetting.showGoogleLogin && widget.onGooglePressed != null)
           Padding(
             padding: const EdgeInsets.symmetric(

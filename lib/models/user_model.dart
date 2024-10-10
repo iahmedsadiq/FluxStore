@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 import 'package:random_string/random_string.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart' as apple;
@@ -38,18 +39,15 @@ class UserModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String?> submitForgotPassword(
-      {String? forgotPwLink, Map<String, dynamic>? data}) async {
-    return await _service.api
-        .submitForgotPassword(forgotPwLink: forgotPwLink, data: data);
+  Future<String?> submitForgotPassword({String? forgotPwLink, Map<String, dynamic>? data}) async {
+    return await _service.api.submitForgotPassword(forgotPwLink: forgotPwLink, data: data);
   }
 
   /// Login by apple, This function only test on iPhone
   Future<void> loginApple({Function? success, Function? fail, context}) async {
     try {
       final result = await apple.TheAppleSignIn.performRequests([
-        const apple.AppleIdRequest(
-            requestedScopes: [apple.Scope.email, apple.Scope.fullName])
+        const apple.AppleIdRequest(requestedScopes: [apple.Scope.email, apple.Scope.fullName])
       ]);
 
       switch (result.status) {
@@ -57,8 +55,7 @@ class UserModel with ChangeNotifier {
           {
             user = await _service.api.loginApple(
                 token: ServerConfig().isMStoreApiPluginSupported
-                    ? String.fromCharCodes(
-                        result.credential!.authorizationCode!)
+                    ? String.fromCharCodes(result.credential!.authorizationCode!)
                     : String.fromCharCodes(result.credential!.identityToken!),
                 firstName: result.credential?.fullName?.givenName,
                 lastName: result.credential?.fullName?.familyName);
@@ -88,11 +85,7 @@ class UserModel with ChangeNotifier {
   }
 
   /// Login by Firebase phone
-  Future<void> loginFirebaseSMS(
-      {String? phoneNumber,
-      required Function success,
-      Function? fail,
-      required BuildContext context}) async {
+  Future<void> loginFirebaseSMS({String? phoneNumber, required Function success, Function? fail, required BuildContext context}) async {
     try {
       user = await _service.api.loginSMS(token: phoneNumber);
       await _saveUser(user);
@@ -112,12 +105,9 @@ class UserModel with ChangeNotifier {
         case LoginStatus.success:
           final accessToken = await FacebookAuth.instance.accessToken;
 
-          Services()
-              .firebase
-              .loginFirebaseFacebook(token: accessToken!.tokenString);
+          Services().firebase.loginFirebaseFacebook(token: accessToken!.tokenString);
 
-          user =
-              await _service.api.loginFacebook(token: accessToken.tokenString);
+          user = await _service.api.loginFacebook(token: accessToken.tokenString);
 
           await _saveUser(user);
           success!(user);
@@ -136,32 +126,33 @@ class UserModel with ChangeNotifier {
   }
 
   Future<void> loginGoogle({Function? success, Function? fail, context}) async {
-    // try {
-    //   var googleSignIn = GoogleSignIn(scopes: ['email']);
-    //
-    //   /// Need to disconnect or cannot login with another account.
-    //   try {
-    //     await googleSignIn.disconnect();
-    //   } catch (_) {
-    //     // ignore.
-    //   }
-    //
-    //   var res = await googleSignIn.signIn();
-    //
-    //   if (res == null) {
-    //     fail!(S.of(context).loginCanceled);
-    //   } else {
-    //     var auth = await res.authentication;
-    //     Services().firebase.loginFirebaseGoogle(token: auth.accessToken);
-    //     user = await _service.api.loginGoogle(token: auth.accessToken);
-    //     await _saveUser(user);
-    //     success!(user);
-    //     notifyListeners();
-    //   }
-    // } catch (err, trace) {
-    //   printError(err, trace);
-    //   fail!(S.of(context).loginErrorServiceProvider(err.toString()));
-    // }
+    try {
+      var googleSignIn = GoogleSignIn(scopes: ['email'], clientId: '765088986301-qak7hvb6sp1to5lqvphcubecfm0p4ft0.apps.googleusercontent.com');
+
+      /// Need to disconnect or cannot login with another account.
+      try {
+        await googleSignIn.disconnect();
+      } catch (_) {
+        // ignore.
+      }
+
+      var res = await googleSignIn.signIn();
+
+      if (res == null) {
+        fail!(S.of(context).loginCanceled);
+      } else {
+        var auth = await res.authentication;
+        Services().firebase.loginFirebaseGoogle(token: auth.accessToken);
+        user = await _service.api.loginGoogle(token: auth.accessToken);
+        await _saveUser(user);
+        success!(user);
+        notifyListeners();
+      }
+    } catch (err, trace) {
+      print('UserModel.loginGoogle $err');
+      printError(err, trace);
+      fail!(S.of(context).loginErrorServiceProvider(err.toString()));
+    }
   }
 
   Future<void> loginWithCookie(
@@ -177,10 +168,7 @@ class UserModel with ChangeNotifier {
 
       if (user == null) {
         final cookies = cookie.convertToCookies();
-        final hasInfoUser = cookies.any((element) =>
-            ['pro_loyalty_api_session', 'customer_sig']
-                .contains(element.name) &&
-            element.value.isNotEmpty);
+        final hasInfoUser = cookies.any((element) => ['pro_loyalty_api_session', 'customer_sig'].contains(element.name) && element.value.isNotEmpty);
 
         if (hasInfoUser) {
           printLog('[loginWithUserWebAccess]:[ROUTE:] recheck cookie');
@@ -226,9 +214,7 @@ class UserModel with ChangeNotifier {
       delegate?.onLoaded(user);
 
       //reload Home screen to show product price based on role
-      if ((kAdvanceConfig.enableWooCommerceWholesalePrices ||
-              kAdvanceConfig.b2bKingConfig.enabled) &&
-          ServerConfig().isWooPluginSupported) {
+      if ((kAdvanceConfig.enableWooCommerceWholesalePrices || kAdvanceConfig.b2bKingConfig.enabled) && ServerConfig().isWooPluginSupported) {
         eventBus.fire(const EventLoadedAppConfig());
       }
     } catch (err) {
@@ -250,8 +236,7 @@ class UserModel with ChangeNotifier {
         }
         await setUser(user, acceptNull: true);
       } else {
-        if (kPaymentConfig.guestCheckout &&
-            ServerConfig().isNeedToGenerateTokenForGuestCheckout) {
+        if (kPaymentConfig.guestCheckout && ServerConfig().isNeedToGenerateTokenForGuestCheckout) {
           delegate?.onLoaded(User()..cookie = _getGenerateCookie());
         }
         notifyListeners();
@@ -294,8 +279,7 @@ class UserModel with ChangeNotifier {
     try {
       loading = true;
       notifyListeners();
-      Services().firebase.createUserWithEmailAndPassword(
-          email: email ?? username, password: password!);
+      Services().firebase.createUserWithEmailAndPassword(email: email ?? username, password: password!);
 
       user = await _service.api.createUser(
         firstName: firstName,
@@ -332,8 +316,7 @@ class UserModel with ChangeNotifier {
     unawaited(_service.api.logout(user?.cookie));
     user = null;
 
-    if (kPaymentConfig.guestCheckout &&
-        ServerConfig().isNeedToGenerateTokenForGuestCheckout) {
+    if (kPaymentConfig.guestCheckout && ServerConfig().isNeedToGenerateTokenForGuestCheckout) {
       delegate?.onLoaded(User()..cookie = _getGenerateCookie());
     }
 
@@ -341,9 +324,7 @@ class UserModel with ChangeNotifier {
     notifyListeners();
 
     //reload Home screen to show correct product price without basing on role
-    if ((kAdvanceConfig.enableWooCommerceWholesalePrices ||
-            kAdvanceConfig.b2bKingConfig.enabled) &&
-        ServerConfig().isWooPluginSupported) {
+    if ((kAdvanceConfig.enableWooCommerceWholesalePrices || kAdvanceConfig.b2bKingConfig.enabled) && ServerConfig().isWooPluginSupported) {
       eventBus.fire(const EventLoadedAppConfig());
     }
   }
@@ -362,8 +343,7 @@ class UserModel with ChangeNotifier {
         password: password,
       );
 
-      final userEmail =
-          (user?.email?.isNotEmpty ?? false) ? user?.email : username;
+      final userEmail = (user?.email?.isNotEmpty ?? false) ? user?.email : username;
       Services().firebase.loginFirebaseEmail(
             email: userEmail,
             password: password,

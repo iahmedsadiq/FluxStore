@@ -44,8 +44,7 @@ class _SMSIndexState extends State<SMSIndex> {
   final _pageController = PageController();
 
   void _goToPage(int index) {
-    _pageController.animateToPage(index,
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    _pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
   }
 
   void _showMessage(err) {
@@ -184,8 +183,7 @@ class _SMSIndexState extends State<SMSIndex> {
         ),
       ),
       body: Selector<SMSModel, bool>(
-        selector: (context, provider) =>
-            provider.state == SMSModelState.loading,
+        selector: (context, provider) => provider.state == SMSModelState.loading,
         builder: (context, isLoading, child) {
           return LoadingBody(
             isLoading: isLoading,

@@ -15,8 +15,7 @@ class LoginSmsViewModel extends ChangeNotifier {
   var _isLoading = false;
   String? _flagUri;
 
-  LoginSmsViewModel(this._firebaseServices)
-      : _verifySuccessStream = _firebaseServices.getFirebaseStream();
+  LoginSmsViewModel(this._firebaseServices) : _verifySuccessStream = _firebaseServices.getFirebaseStream();
 
   bool get isLoading => _isLoading;
   String? get countryCode => _code;

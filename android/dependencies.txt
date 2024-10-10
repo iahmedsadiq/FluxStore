@@ -14,6 +14,7 @@
 
 
 🔑 Signing with keystore key.jks... 🔑
+🔑 Signing with keystore upload-keystore.jks... 🔑
 
 
 > Task :app:dependencies

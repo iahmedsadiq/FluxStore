@@ -61,14 +61,17 @@ class SMSModel extends ChangeNotifier {
             forceResendingToken: _resendToken,
             phoneNumber: dialPhoneNumber,
             verificationCompleted: (String? smsCode) {
+              print('SMSModel.sendOTP');
               _smsCode = smsCode!;
               onVerify?.call();
             },
             verificationFailed: (FirebaseErrorException e) {
+              print('SMSModel.sendOTP');
               onMessage?.call(e);
               _updateState(SMSModelState.complete);
             },
             codeSent: (String verificationId, int? resendToken) {
+              print('SMSModel.sendOTP');
               _verificationId = verificationId;
               _resendToken = resendToken;
               onPageChanged?.call();
@@ -80,7 +83,9 @@ class SMSModel extends ChangeNotifier {
               //   onVerify();
               // });
             },
-            codeAutoRetrievalTimeout: (String verificationId) {},
+            codeAutoRetrievalTimeout: (String verificationId) {
+              print('SMSModel.sendOTP');
+            },
           );
     } catch (err) {
       printLog(err.toString());
@@ -91,12 +96,9 @@ class SMSModel extends ChangeNotifier {
   Future<bool> smsVerify(Function showMessage) async {
     _updateState(SMSModelState.loading);
     try {
-      final credential = Services().firebase.getFirebaseCredential(
-          verificationId: _verificationId, smsCode: _smsCode);
+      final credential = Services().firebase.getFirebaseCredential(verificationId: _verificationId, smsCode: _smsCode);
 
-      final user = await Services()
-          .firebase
-          .loginFirebaseCredential(credential: credential);
+      final user = await Services().firebase.loginFirebaseCredential(credential: credential);
       if (user != null) {
         _phoneNumber = _phoneNumber.replaceAll('+', '').replaceAll(' ', '');
         return true;
@@ -128,8 +130,7 @@ class SMSModel extends ChangeNotifier {
 
   Future<User?> login() async {
     try {
-      final result =
-          await Services().api.loginSMS(token: dialPhoneNumberWithoutPlus);
+      final result = await Services().api.loginSMS(token: dialPhoneNumberWithoutPlus);
       if (result == null) {
         _updateState(SMSModelState.complete);
       }

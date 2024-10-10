@@ -33,8 +33,7 @@ class FirebaseAuthServiceImpl extends FirebaseAuthService {
 
   @override
   void loginFirebaseGoogle({token}) async {
-    AuthCredential credential =
-        GoogleAuthProvider.credential(accessToken: token);
+    AuthCredential credential = GoogleAuthProvider.credential(accessToken: token);
     await _auth.signInWithCredential(credential);
   }
 
@@ -100,6 +99,7 @@ class FirebaseAuthServiceImpl extends FirebaseAuthService {
     forceResendingToken,
     Duration? timeout,
   }) async {
+    print('FirebaseAuthServiceImpl.verifyPhoneNumber');
     await _auth.verifyPhoneNumber(
         phoneNumber: phoneNumber!,
         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
@@ -108,8 +108,7 @@ class FirebaseAuthServiceImpl extends FirebaseAuthService {
         verificationCompleted: (phoneAuthCredential) {
           verificationCompleted(phoneAuthCredential.smsCode);
         },
-        verificationFailed: (error) =>
-            verificationFailed?.call(error.toEntityApp()),
+        verificationFailed: (error) => verificationFailed?.call(error.toEntityApp()),
         forceResendingToken: forceResendingToken);
   }
 
